@@ -3,14 +3,42 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import router from './router'
+import sql from './sql.db'
+import { HelloResolver } from './resolvers/hello'
+import { PostResolver } from './resolvers/post'
+import { ApolloServer } from 'apollo-server-express'
+import { UserResolver } from './resolvers/user'
+import { buildSchema } from 'type-graphql'
+import { createPostLoader } from './loaders/post'
+import { createCommentLoader } from './loaders/comment'
+import { createUserLoader } from './loaders/user'
+
 configEnv()
 
 const port = process.env.PORT || 4000
 
 export const createApp = async () => {
+  // connect to db
+  await sql()
   // pre create app scripts
 
   const app = express()
+
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [HelloResolver, PostResolver, UserResolver],
+      validate: false,
+    }),
+    context: ({ req, res }) => ({
+      req,
+      res,
+      userLoader: createUserLoader(),
+      postLoader: createPostLoader(),
+      commentLoader: createCommentLoader(),
+    }),
+  })
+
+  await apolloServer.start()
 
   app.use(express.json())
   app.use(cors())
@@ -18,6 +46,12 @@ export const createApp = async () => {
   app.use(cookieParser())
 
   app.use('/', router)
+
+  apolloServer.applyMiddleware({
+    path: '/graphql',
+    app,
+    cors: false,
+  })
 
   // error handling middleware
   app.use((e, req, res, next) => {
