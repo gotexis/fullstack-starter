@@ -5,9 +5,7 @@ import App from "./App"
 import { Provider as Redux } from "react-redux"
 import { BaseProvider } from "./context/base"
 import { BrowserRouter } from "react-router-dom"
-import configureStore from "./store/index"
-
-export const { store } = configureStore()
+import { store } from "./store/index"
 
 ReactDOM.render(
   <React.StrictMode>
