@@ -1,24 +1,18 @@
-import { createStore, applyMiddleware } from "redux"
-import { persistStore, persistReducer } from "redux-persist"
-import storage from "redux-persist/lib/storage"
-import rootReducer from "./root"
-import { composeWithDevTools } from "redux-devtools-extension"
-import thunk from "redux-thunk"
+import { configureStore } from '@reduxjs/toolkit'
+import ui from "./ui";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 
-const persistConfig = {
-  key: "app",
-  storage,
-  whitelist: []
-}
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+export const store = configureStore({
+    reducer: {
+        ui,
+    }
+})
 
-const middlewares = [thunk]
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-const configureStore = (preloadedState: any = {}) => {
-  const store = createStore(persistedReducer, preloadedState, composeWithDevTools(applyMiddleware(...middlewares)))
-  const persistor = persistStore(store)
-  return { store, persistor }
-}
+export default store
 
-export default configureStore
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
