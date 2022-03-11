@@ -1,11 +1,12 @@
 import React from "react"
 import styled from "styled-components"
 import { Component } from "react"
+import styles from "../styles"
 
 const Box = ({ children }: { children: Component | any }) => <Root>{children}</Root>
 
 const Root = styled.div`
-  width: 100%;
+  ${styles.innerWidthLimit}
 `
 
 export default Box

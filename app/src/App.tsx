@@ -1,8 +1,9 @@
 import React from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
-import { Switch, Route } from "react-router"
+import { Routes, Route } from "react-router"
 import Main from "./pages/main"
 import Sub from "./pages/sub"
+import Header from "./components/layout/Header"
 
 import "./index.scss"
 
@@ -11,10 +12,11 @@ const queryClient = new QueryClient()
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/sub" component={Sub} />
-      </Switch>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/sub" element={<Sub />} />
+      </Routes>
     </QueryClientProvider>
   )
 }
