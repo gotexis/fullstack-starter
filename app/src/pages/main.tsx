@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import Box from "../components/Box"
 import axios from "axios"
+import { useQuery } from "react-query"
 
 const Main = () => {
-  const [state, setState] = useState<any>(null)
-  useEffect(() => {
-    const _ = async () => {
-      const { data } = await axios.get("http://localhost:4000/ping/")
-      setState(JSON.stringify(data))
-    }
-    _().then()
-  }, [])
+  const { data, isLoading, isError } = useQuery("data", () => axios.get("http://localhost:4000/ping/"))
+
+  if (isLoading) return <p>Loading...</p>
+  if (isError) return <p>Error :(</p>
+
   return (
     <div>
       <Box>main</Box>
-      <div>{state}</div>
+      <div>{data}</div>
     </div>
   )
 }

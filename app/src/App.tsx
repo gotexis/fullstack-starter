@@ -1,15 +1,21 @@
 import React from "react"
-import "./index.scss"
+import { QueryClient, QueryClientProvider } from "react-query"
 import { Switch, Route } from "react-router"
 import Main from "./pages/main"
 import Sub from "./pages/sub"
 
+import "./index.scss"
+
+const queryClient = new QueryClient()
+
 const App = () => {
   return (
-    <Switch>
-      <Route path="/" exact component={Main} />
-      <Route path="/sub" component={Sub} />
-    </Switch>
+    <QueryClientProvider client={queryClient}>
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/sub" component={Sub} />
+      </Switch>
+    </QueryClientProvider>
   )
 }
 
