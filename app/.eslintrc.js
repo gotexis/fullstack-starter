@@ -29,7 +29,8 @@ module.exports = {
         semi: false,
         jsxSingleQuote: false,
         trailingComma: "none",
-        singleQuote: false
+        singleQuote: false,
+        endOfLine: "auto"
       }
     ],
     "@typescript-eslint/no-explicit-any": 0,

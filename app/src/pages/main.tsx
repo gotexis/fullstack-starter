@@ -4,7 +4,10 @@ import axios from "axios"
 import { useQuery } from "react-query"
 
 const Main = () => {
-  const { data, isLoading, isError } = useQuery("data", () => axios.get("http://localhost:4000/ping/"))
+  const { data, isLoading, isError } = useQuery(
+    "data",
+    async () => (await axios.get("http://localhost:4000/ping/")).data
+  )
 
   if (isLoading) return <p>Loading...</p>
   if (isError) return <p>Error :(</p>
@@ -12,7 +15,7 @@ const Main = () => {
   return (
     <div>
       <Box>main</Box>
-      <div>{data}</div>
+      <div>{JSON.stringify(data)}</div>
     </div>
   )
 }

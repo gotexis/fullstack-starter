@@ -1,21 +1,21 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface UiState {
-    errorMessage: string
+  errorMessage: string
 }
 
 const initialState: UiState = {
-    errorMessage: "",
+  errorMessage: ""
 }
 
 export const uiSlice = createSlice({
-    name: 'ui',
-    initialState,
-    reducers: {
-        setErrorMessage: (state, action: PayloadAction<string>) => {
-            state.errorMessage = action.payload
-        },
-    },
+  name: "ui",
+  initialState,
+  reducers: {
+    setErrorMessage: (state, action: PayloadAction<string>) => {
+      state.errorMessage = action.payload
+    }
+  }
 })
 
 export const { setErrorMessage } = uiSlice.actions
