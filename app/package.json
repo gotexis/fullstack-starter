@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "craco start",
+    "build": "craco build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix"
@@ -23,7 +23,8 @@
     "react-scripts": "5.0.0",
     "redux-persist": "^5.10.0",
     "styled-components": "^5.3.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "craco": "^0.0.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.12.0",
