@@ -1,26 +1,22 @@
 {
   "private": true,
-  "workspaces": {
-    "packages": [
-      "api",
-      "app",
-      "common"
-    ]
-  },
+  "workspaces": [
+    "api",
+    "app",
+    "common"
+  ],
   "scripts": {
-    "dev": "run-p dev:api dev:app",
-    "dev:app": "cd app && yarn start",
-    "dev:api": "cd api && yarn dev",
+    "dev": "npm run dev --workspaces",
     "test": "run-p test:api test:app",
-    "test:app": "cd app && yarn test",
-    "test:api": "cd api && yarn test"
+    "test:app": "cd app && npm run test",
+    "test:api": "cd api && npm run test"
   },
   "dependencies": {
     "cross-env": "^7.0.2"
   },
   "devDependencies": {
     "yup": "^0.32.11",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^29.2.4",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "eslint": "^7.26.0",
